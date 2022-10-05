@@ -1,0 +1,2 @@
+# ngt
+Notan Game Template
