@@ -1,0 +1,20 @@
+[package]
+name = "{{ crate_name }}"
+version = "0.1.0"
+edition = "2021"
+authors = ["{{ authors }}"]
+description = ["{{ project-name }}, is an awesome Notan game"]
+publish = false
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[profile.dev]
+opt-level = 1
+
+[profile.dev.package."*"]
+opt-level = 3
+
+[dependencies]
+notan = "0.7"
+log = { version = "0.4", features = ["max_level_debug", "release_max_level_warn"] }
