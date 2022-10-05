@@ -3,7 +3,7 @@ name = "{{ crate_name }}"
 version = "0.1.0"
 edition = "2021"
 authors = ["{{ authors }}"]
-description = ["{{ project-name }}, is an awesome Notan game"]
+description = "{{ project-name }} - Notan Game"
 publish = false
 
 [lib]
