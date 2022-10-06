@@ -16,5 +16,5 @@ opt-level = 1
 opt-level = 3
 
 [dependencies]
-notan = "0.7"
+notan = { version = "0.7", features = ["audio", "extra"] }
 log = { version = "0.4", features = ["max_level_debug", "release_max_level_warn"] }
