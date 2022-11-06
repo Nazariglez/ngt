@@ -1,10 +1,11 @@
-use gotan::draw::Draw;
+use notan::draw::Draw;
 use notan::math::{vec2, vec3, Mat3, Mat4, Vec2};
 
 pub struct Camera2D {
     win_size: Vec2,
     work_size: Vec2,
     pos: Vec2,
+    scale: Vec2,
     projection: Mat4,
     ratio: f32,
     transform: Mat3,
@@ -15,6 +16,7 @@ impl Camera2D {
     pub fn new(width: f32, height: f32) -> Self {
         let size = vec2(width, height);
         let pos = Vec2::splat(0.0);
+        let scale = Vec2::splat(1.0);
         let projection = Mat4::IDENTITY;
         let ratio = 1.0;
         let transform = Mat3::IDENTITY;
@@ -23,6 +25,7 @@ impl Camera2D {
             work_size: size,
             win_size: size,
             pos,
+            scale,
             projection,
             ratio,
             transform,
@@ -59,6 +62,22 @@ impl Camera2D {
         self.set_position(self.work_size.x * 0.5, self.work_size. y * 0.5);
     }
 
+    pub fn set_scale(&mut self, x: f32, y: f32) {
+        let scale = vec2(x, y);
+        if self.scale != scale {
+            self.dirty = true;
+            self.scale = scale;
+        }
+    }
+
+    pub fn scale(&self) -> Vec2 {
+        self.scale
+    }
+
+    pub fn set_zoom(&mut self, factor: f32) {
+        self.set_scale(factor, factor);
+    }
+
     fn calculate_projection(&mut self) {
         let (projection, ratio) = calc_projection(self.win_size, self.work_size);
         self.projection = projection;
@@ -66,8 +85,10 @@ impl Camera2D {
     }
 
     fn calculate_transform(&mut self) {
-        let pos = self.pos - self.work_size * 0.5;
-        self.transform = Mat3::from_translation(pos * -1.0);
+        let pos = self.pos - self.work_size * 0.5 / self.scale;
+        let translate = Mat3::from_translation(pos * -1.0);
+        let scale = Mat3::from_scale(self.scale);
+        self.transform = scale * translate;
     }
 
     fn set_win_size(&mut self, size: Vec2) {
