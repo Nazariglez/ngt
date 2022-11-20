@@ -1,5 +1,5 @@
 mod game;
-mod camera;
+mod camera2d;
 
 use notan::prelude::*;
 
