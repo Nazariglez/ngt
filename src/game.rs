@@ -2,6 +2,7 @@ use notan::draw::*;
 use notan::extra::FpsLimit;
 use notan::math::{vec2, vec3, Mat4, Vec2};
 use notan::prelude::*;
+use crate::camera2d::Camera2D;
 
 // This is the size of our content, no matter the size
 // of the window our content will always keep this aspect ratio
