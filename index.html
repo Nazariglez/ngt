@@ -1,4 +1,4 @@
-<html>
+<html lang="en">
 <head>
     <title>{{ project-name }} - Notan Game</title>
     <meta content="text/html;charset=utf-8" http-equiv="Content-Type"/>
@@ -6,7 +6,6 @@
     <meta name="viewport"
           content="minimal-ui, width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
-
     <style>
         html, body {
             width: 100%;
@@ -28,10 +27,6 @@
     </style>
 </head>
 <body>
-<script type="module">
-    import init from './pkg/{{ crate_name }}.js';
-    let module = await init();
-    module.notan_main();
-</script>
     <canvas id="notan_canvas"></canvas>
 </body>
+</html>
